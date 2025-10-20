@@ -1,0 +1,218 @@
+{
+    "openapi":"3.0.3",
+    "info": {
+        "title": "",
+        "description": "Documentation RESTfull API",
+        "termsOfService": "https://github.com/RezzaAnugrah/OpenAPI",
+        "version": "1.0.0",
+        "license": {
+            "name": "APACHE 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "contact": {
+            "name": "Rezza",
+            "email": "rezza.anugrahm1@gmail.com",
+            "url": "https://github.com/RezzaAnugrah/OpenAPI"
+        }
+        
+    },
+    "servers": [
+        {
+            "description": "Registration Account Binding API",
+            "url": "https://{env}.organization.com/api/v1.0",
+            "variables": {
+                "env":{
+                    "default": "sit",
+                    "description": "Server Environment",
+                    "enum": ["sit","uat","alfa","prod"]
+
+                }
+            }
+        }
+    ],
+    "paths": {
+        "/registration-account-binding":{
+            "post":{
+                "security": [
+                    {"MySecurity":[]}
+                ],
+                "tags": ["Phase1A"],
+                "description": "Registration account binding",
+                "summary": "Registration account binding",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/X-TIMESTAMP"
+                    },{
+                        "$ref": "#/components/parameters/X-PARTNER-ID"
+                    },{
+                        "$ref": "#/components/parameters/X-SIGNATURE"
+                    },{
+                        "$ref": "#/components/parameters/X-EXTERNAL-ID"
+                    },{
+                        "$ref": "#/components/parameters/CHANNEL-ID"
+                    },{
+                        "$ref": "#/components/parameters/Authorization"
+                    }
+                ],
+                "requestBody":{
+                    "required": true,
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "partnerReferenceNo":{
+                                        "type": "string",
+                                        "minLength": 12,
+                                        "example":"BINDAR231101"
+                                    },
+                                    "merchantId":{
+                                        "type": "string",
+                                        "minLength": 64,
+                                        "example":"DIGITAL"
+                                    },
+                                    "authcode":{
+                                        "type": "string",
+                                        "minLength": 256,
+                                        "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "responseCode":{
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "example":200
+                                        },
+                                        "responseMessage":{
+                                            "type": "string",
+                                            "minLength": 6,
+                                            "example":"Successful"
+                                        },
+                                         "referenceNo":{
+                                            "type": "string",
+                                            "minLength": 6,
+                                            "example":"Success"
+                                        },
+                                         "partnerReferenceNo":{
+                                            "type": "string",
+                                            "minLength": 6,
+                                            "example":"BINDAR231101"
+                                        },
+                                         "accountToken":{
+                                            "type": "string",
+                                            "minLength": 6,
+                                            "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "components": {
+        "parameters": {
+            "X-TIMESTAMP":{
+                "name": "X-TIMESTAMP",
+                "in": "header",
+                "required": true,
+                "description": "Time to request",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 24,
+                    "minLength": 24
+                },
+                "example":"2025-04-28T16:50:34+0700"
+            },
+            "X-PARTNER-ID":{
+                "name": "X-PARTNER-ID",
+                "in": "header",
+                "required": true,
+                "description": "Partner-ID as client",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 1
+                },
+                "example":"06f37ffd2fec213ed333a3b3bc216739"
+            
+            },
+            "X-SIGNATURE":{
+                "name": "X-SIGNATURE",
+                "in": "header",
+                "required": true,
+                "description": "Signature is original value as sender",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "example":"aG0aynBa+y4UU6jzgrrRfENu6iAxGAC1S44f9jndyT3ggUN6MFBkanLh5DjLQMnPOpqjf3kePzgH7drkdEXhaQ=="
+            
+            },
+            "X-EXTERNAL-ID":{
+                "name": "X-EXTERNAL-ID",
+                "in": "header",
+                "required": true,
+                "description": "External-ID is unique id per transaction",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 12,
+                    "minLength": 1
+                },
+                "example":"uEqL26081423"
+            
+            },
+            "CHANNEL-ID":{
+                "name": "CHANNEL-ID",
+                "in": "header",
+                "required": true,
+                "description": "Channel-ID is name of client",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 12,
+                    "minLength": 1
+                },
+                "example":"DIGITAL"
+            
+            },
+            "Authorization":{
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "description": "Authorization is bearer token",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV"
+            }
+        },
+        "schemas": {},
+        "securitySchemes": {
+            "MySecurity":{
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-PARTNER-ID",
+                "description": "APIKey as partner-id"
+            }
+        }
+    }
+
+}

@@ -1,0 +1,279 @@
+{
+    "openapi":"3.0.3",
+    "info": {
+        "title": "Get Auth Code API",
+        "description": "Documentation RESTfull API",
+        "termsOfService": "https://github.com/RezzaAnugrah/OpenAPI",
+        "version": "1.0.0",
+        "license": {
+            "name": "APACHE 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "contact": {
+            "name": "Rezza Anugrah Mutiarawan",
+            "email": "rezza.anugrahm1@gmail.com",
+            "url": "https://github.com/RezzaAnugrah/OpenAPI"
+        }
+        
+    },
+    "servers": [
+        {
+            "description": "Get Auth Code API",
+            "url": "https://{env}.organization.com/api/v1.0",
+            "variables": {
+                "env":{
+                    "default": "sit",
+                    "description": "Server Environment",
+                    "enum": ["sit","uat","alfa","prod"]
+                }
+            }
+        }
+    ],
+    "paths": {
+        "/get-auth-code":{
+            "get":{
+                "security": [
+                    {"MySecurity":[]}
+
+                ],
+                "tags": ["Phase1A"],
+                "description": "Get auth code as session-id",
+                "summary": "Get auth code as session-id",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/X-TIMESTAMP"
+                    },{
+                        "$ref": "#/components/parameters/X-PARTNER-ID"
+                    },{
+                        "$ref": "#/components/parameters/X-SIGNATURE"
+                    },{
+                        "$ref": "#/components/parameters/X-EXTERNAL-ID"
+                    },{
+                        "$ref": "#/components/parameters/CHANNEL-ID"
+                    },{
+                        "$ref": "#/components/parameters/Authorization"
+                    },{
+                        "$ref": "#/components/parameters/State"
+                    },{
+                        "$ref": "#/components/parameters/Scopes"
+                    },{
+                        "$ref": "#/components/parameters/RedirectUrl"
+                    },{
+                        "$ref": "#/components/parameters/SeamlessData"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Successful",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/components/schemas/200-schema"
+                                }
+                            }
+                        }
+                    },
+
+                    "400":{
+                        "description": "Not found",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/components/schemas/404-schema"
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+    },
+    "components": {
+        "parameters": {
+            "X-TIMESTAMP":{
+                "name": "X-TIMESTAMP",
+                "in": "header",
+                "required": true,
+                "description": "Time to request",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 24,
+                    "minLength": 24
+                },
+                "example":"2025-04-28T16:50:34+0700"
+            },
+            "X-PARTNER-ID":{
+                "name": "X-PARTNER-ID",
+                "in": "header",
+                "required": true,
+                "description": "Partner-ID as client",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 1
+                },
+                "example":"06f37ffd2fec213ed333a3b3bc216739"
+            
+            },
+            "X-SIGNATURE":{
+                "name": "X-SIGNATURE",
+                "in": "header",
+                "required": true,
+                "description": "Signature is original value as sender",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "example":"aG0aynBa+y4UU6jzgrrRfENu6iAxGAC1S44f9jndyT3ggUN6MFBkanLh5DjLQMnPOpqjf3kePzgH7drkdEXhaQ=="
+            
+            },
+            "X-EXTERNAL-ID":{
+                "name": "X-EXTERNAL-ID",
+                "in": "header",
+                "required": true,
+                "description": "External-ID is unique id per transaction",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 12,
+                    "minLength": 1
+                },
+                "example":"uEqL26081423"
+            
+            },
+            "CHANNEL-ID":{
+                "name": "CHANNEL-ID",
+                "in": "header",
+                "required": true,
+                "description": "Channel-ID is name of client",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 12,
+                    "minLength": 1
+                },
+                "example":"DIGITAL"
+            
+            },
+            "Authorization":{
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "description": "Authorization is bearer token",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV-rzwiRgxE3UDYxbrhIpvPNZ0eyplxRYhBqCS7HTsBdVvW0LsWX69dZcR100KEb6e0D8ailQvneTugc8ebLydHk"
+            
+            },
+            "State":{
+                "name": "state",
+                "in": "query",
+                "required": true,
+                "description": "Random string from request",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 12,
+                    "minLength": 1
+                },
+                "example":"WodkkwijSDs"
+            
+            },
+            "Scopes":{
+                "name": "scopes",
+                "in": "query",
+                "required": true,
+                "description": "scopes",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 1
+                },
+                "example":"QUERY_BALANCE,PUBLIC_ID"
+            
+            },
+            "RedirectUrl":{
+                "name": "redirectUrl",
+                "in": "query",
+                "required": true,
+                "description": "redirectUrl",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 1
+                },
+                "example":"https://www.google.com/success-page"
+            }
+            ,
+            "SeamlessData":{
+                "name": "seamlessData",
+                "in": "query",
+                "required": true,
+                "description": "seamlessData",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 150,
+                    "minLength": 1
+                },
+                "example":"%7B%22mobileNumber%22%3D%22082111641773%22%7D"
+            }
+
+        },
+        "schemas": {
+            "200-schema":{
+                "type": "object",
+                "properties": {
+                    "responseCode":{
+                        "type": "string",
+                        "minLength": 7,
+                        "example": "2001000"
+                    },
+                    "responseMessage":{
+                        "type": "string",
+                        "minLength": 150,
+                        "example":"Successful"
+                    }, 
+                    "authcode":{
+                        "type": "string",
+                        "minLength": 256,
+                        "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
+                    },
+                    "state":{
+                        "type": "string",
+                        "minLength": 32,
+                        "example":"WodkkwijSDs"
+                    }
+                }
+            },
+
+            "404-schema":{
+                "type": "object",
+                "properties": {
+                    "responseCode":{
+                        "type": "string",
+                        "minLength": 7,
+                        "example": "4041000"
+                        },
+                    "responseMessage":{
+                        "type": "string",
+                        "minLength": 50,
+                        "example":"Not found"
+                    }
+                }
+            }
+        
+        },
+        "securitySchemes": {
+            "MySecurity":{
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-PARTNER-ID",
+                "description": "APIKey as partner-id"
+            }
+        }
+    }
+
+}

@@ -1,0 +1,26 @@
+{
+    "openapi":"3.0.3",
+    "info": {
+        "title": "",
+        "description": "Documentation RESTfull API",
+        "termsOfService": "https://github.com/RezzaAnugrah/OpenAPI",
+        "version": "1.0.0",
+        "license": {
+            "name": "APACHE 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "contact": {
+            "name": "Rezza",
+            "email": "rezza.anugrahm1@gmail.com",
+            "url": "https://github.com/RezzaAnugrah/OpenAPI"
+        }
+        
+    },
+    "servers": [],
+    "paths": {},
+    "components": {
+        "parameters": {},
+        "schemas": {}
+    }
+
+}
