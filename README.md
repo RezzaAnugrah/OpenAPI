@@ -53,6 +53,6 @@ Object OpenAPI :
 2. info
 3. servers
 4. paths
-5. components
-    a. parameters
-    b. schemas
+5. components : 
+    - parameters
+    - schemas

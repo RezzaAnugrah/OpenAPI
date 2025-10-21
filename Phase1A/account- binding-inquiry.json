@@ -18,27 +18,27 @@
     },
     "servers": [
         {
-            "description": "Registration Account Binding API",
-            "url": "https://{env}.organization.com/api/v1.0",
+            "description": "Account Binding Inquiry",
+            "url": "http://{env}.organization.com/api/v1.0",
             "variables": {
                 "env":{
                     "default": "sit",
                     "description": "Server Environment",
                     "enum": ["sit","uat","alfa","prod"]
-
                 }
             }
         }
     ],
+
     "paths": {
-        "/registration-account-binding":{
+        "/registration-acount-inquiry":{
             "post":{
                 "security": [
                     {"MySecurity":[]}
                 ],
                 "tags": ["Phase1A"],
-                "description": "Registration account binding",
-                "summary": "Registration account binding",
+                "description": "Get account by inquiry",
+                "summary": "Get account by inquiry",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/X-TIMESTAMP"
@@ -54,6 +54,7 @@
                         "$ref": "#/components/parameters/Authorization"
                     }
                 ],
+
                 "requestBody":{
                     "required": true,
                     "content": {
@@ -66,21 +67,27 @@
                                         "minLength": 12,
                                         "example":"BINDAR231101"
                                     },
-                                    "merchantId":{
-                                        "type": "string",
-                                        "minLength": 64,
-                                        "example":"DIGITAL"
-                                    },
-                                    "authcode":{
-                                        "type": "string",
-                                        "minLength": 256,
-                                        "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
+                                    "additionalInfo":{
+                                        "type": "object",
+                                        "properties": {
+                                            "accountToken":{
+                                                "type": "string",
+                                                "minLength": 256,
+                                                "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
+                                            },
+                                            "authcode":{
+                                                "type": "string",
+                                                "minLength": 256,
+                                                "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 },
+
                 "responses": {
                     "200":{
                         "description": "Success",
@@ -92,7 +99,7 @@
                             }
                         }
                     },
-                    "404":{
+                    "400":{
                         "description": "Not found",
                         "content": {
                             "application/json":{
@@ -192,7 +199,7 @@
                 "properties": {
                     "responseCode":{
                         "type": "string",
-                        "minLength": 6,
+                        "minimum": 3,
                         "example":200
                     },
                     "responseMessage":{
@@ -200,22 +207,34 @@
                         "minLength": 6,
                         "example":"Successful"
                     },
-                        "referenceNo":{
+                    "partnerReferenceNo":{
+                        "type": "string",
+                        "minLength": 6,
+                        "example":"BINDAR231101"
+                    },"referenceNo":{
                         "type": "string",
                         "minLength": 6,
                         "example":"28d03816123a"
                     },
-                        "partnerReferenceNo":{
+                    "accountNo":{
                         "type": "string",
                         "minLength": 6,
-                        "example":"BINDAR231101"
+                        "example":"7070808090100"
+                    },"accountName":{
+                        "type": "string",
+                        "minLength": 6,
+                        "example":"Rezza Anugrah Mutiarawan"
                     },
-                        "accountToken":{
+                    "accountTransactionLimit":{
                         "type": "string",
                         "minLength": 6,
-                        "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
+                        "example":"10000000"
+                    },"accountCurrency":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 3,
+                        "example":"IDR"
                     }
-
                 }
             },
 
@@ -240,7 +259,7 @@
                 "type": "apiKey",
                 "in": "header",
                 "name": "X-PARTNER-ID",
-                "description": "APIKey as partner-id"
+                "description": "APIKey as Partner-id"
             }
         }
     }
