@@ -1,7 +1,7 @@
 {
     "openapi":"3.0.3",
     "info": {
-        "title": "Get Auth Code API",
+        "title": "",
         "description": "Documentation RESTfull API",
         "termsOfService": "https://github.com/RezzaAnugrah/OpenAPI",
         "version": "1.0.0",
@@ -10,16 +10,16 @@
             "url": "https://www.apache.org/licenses/LICENSE-2.0"
         },
         "contact": {
-            "name": "Rezza Anugrah Mutiarawan",
+            "name": "Rezza",
             "email": "rezza.anugrahm1@gmail.com",
             "url": "https://github.com/RezzaAnugrah/OpenAPI"
         }
         
     },
     "servers": [
-        {
-            "description": "Get Auth Code API",
-            "url": "https://{env}.organization.com/api/v1.0",
+         {
+            "description": "Payment host to host",
+            "url": "http://{env}.organization.com/api/v1.0",
             "variables": {
                 "env":{
                     "default": "sit",
@@ -29,16 +29,16 @@
             }
         }
     ],
+    
     "paths": {
-        "/get-auth-code":{
-            "get":{
-                "security": [
-                    {"MySecurity":[]}
-
-                ],
+        "/debit/payment-host-to-host":{
+            "post":{
+                "security": [{
+                    "MySecurity":[]
+                }],
                 "tags": ["Phase1A"],
-                "description": "Get auth code as session-id",
-                "summary": "Get auth code as session-id",
+                "description": "Payment host to host",
+                "summary": "Payment host to host",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/X-TIMESTAMP"
@@ -52,19 +52,64 @@
                         "$ref": "#/components/parameters/CHANNEL-ID"
                     },{
                         "$ref": "#/components/parameters/Authorization"
-                    },{
-                        "$ref": "#/components/parameters/State"
-                    },{
-                        "$ref": "#/components/parameters/Scopes"
-                    },{
-                        "$ref": "#/components/parameters/RedirectUrl"
-                    },{
-                        "$ref": "#/components/parameters/SeamlessData"
                     }
                 ],
+                "requestBody":{
+                    "required": true,
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "partnerReferenceNo":{
+                                        "type": "string",
+                                        "minLength": 64,
+                                        "example":"INQURY103104"
+                                    },
+                                    "bankCardToken":{
+                                        "type": "string",
+                                        "minLength": 128,
+                                        "example":"UahgvQm7iqAq5VaJCjlkHkRdX4sTa4gFliSZdp3y5XvW"
+                                    },
+                                    "otp":{
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example":""
+                                    },
+                                    "amount":{
+                                        "type": "object",
+                                        "properties": {
+                                            "value":{
+                                                "type": "string",
+                                                "minLength": 18,
+                                                "example":"10000.00"
+                                            },
+                                            "currency":{
+                                                "type": "string",
+                                                "minLength": 3,
+                                                "example":"IDR"
+                                            }
+                                        }
+                                    },
+                                   
+                                    "additionalInfo":{
+                                        "type": "object",
+                                        "properties": {
+                                            "remark":{
+                                                "type": "string",
+                                                "minLength": 255,
+                                                "example":"Test Payment"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 
                 "responses": {
                     "200":{
-                        "description": "Successful",
+                        "description": "Success",
                         "content": {
                             "application/json":{
                                 "schema":{
@@ -73,11 +118,10 @@
                             }
                         }
                     },
-
-                    "400":{
-                        "description": "Not found",
+                    "404":{
+                        "description": "No found",
                         "content": {
-                            "application/json":{
+                            "applicatoin/json":{
                                 "schema":{
                                     "$ref": "#/components/schemas/404-schema"
                                 }
@@ -87,9 +131,9 @@
                 }
 
             }
-
         }
     },
+
     "components": {
         "parameters": {
             "X-TIMESTAMP":{
@@ -166,61 +210,8 @@
                     "maxLength": 255,
                     "minLength": 1
                 },
-                "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV-rzwiRgxE3UDYxbrhIpvPNZ0eyplxRYhBqCS7HTsBdVvW0LsWX69dZcR100KEb6e0D8ailQvneTugc8ebLydHk"
-            
-            },
-            "State":{
-                "name": "state",
-                "in": "query",
-                "required": true,
-                "description": "Random string from request",
-                "schema":{
-                    "type": "string",
-                    "maxLength": 12,
-                    "minLength": 1
-                },
-                "example":"WodkkwijSDs"
-            
-            },
-            "Scopes":{
-                "name": "scopes",
-                "in": "query",
-                "required": true,
-                "description": "scopes",
-                "schema":{
-                    "type": "string",
-                    "maxLength": 50,
-                    "minLength": 1
-                },
-                "example":"QUERY_BALANCE,PUBLIC_ID"
-            
-            },
-            "RedirectUrl":{
-                "name": "redirectUrl",
-                "in": "query",
-                "required": true,
-                "description": "redirectUrl",
-                "schema":{
-                    "type": "string",
-                    "maxLength": 50,
-                    "minLength": 1
-                },
-                "example":"https://www.google.com/success-page"
+                "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV"
             }
-            ,
-            "SeamlessData":{
-                "name": "seamlessData",
-                "in": "query",
-                "required": true,
-                "description": "seamlessData",
-                "schema":{
-                    "type": "string",
-                    "maxLength": 150,
-                    "minLength": 1
-                },
-                "example":"%7B%22mobileNumber%22%3D%22082111641773%22%7D"
-            }
-
         },
         "schemas": {
             "200-schema":{
@@ -229,33 +220,68 @@
                     "responseCode":{
                         "type": "string",
                         "minLength": 7,
-                        "example": "2001000"
+                        "example": "2005400"
                     },
                     "responseMessage":{
                         "type": "string",
                         "minLength": 150,
-                        "example":"Successful"
-                    }, 
-                    "authcode":{
-                        "type": "string",
-                        "minLength": 256,
-                        "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
+                        "example":"OTP Sent To Cardholer"
                     },
-                    "state":{
+                    "referenceNo":{
                         "type": "string",
-                        "minLength": 32,
-                        "example":"WodkkwijSDs"
+                        "minLength": 64,
+                        "example":""
+                    },
+                    "partnerReferenceNo":{
+                        "type": "string",
+                        "minLength": 64,
+                        "example":"INQURY100901"
+                    },
+                    "amount":{
+                        "type": "object",
+                        "properties": {
+                           "value":{
+                                "type": "string",
+                                "minLength": 18,
+                                "example":"10000.00"
+                            },
+                            "currency":{
+                                "type": "string",
+                                "minLength": 3,
+                                "example":"IDR"
+                            }
+                        }
+                    },
+                    "additionalInfo":{
+                        "type": "object",
+                        "properties": {
+                           "remark":{
+                                "type": "string",
+                                "minLength": 255,
+                                "example":"Test payment"
+                            },
+                            "otpRefNo":{
+                                "type": "string",
+                                "minLength": 12,
+                                "example":"9ab0802a66"
+                            },
+                            "message":{
+                                "type": "string",
+                                "minLength": 150,
+                                "example":"Kami telah mengirimkan OTP melalui nomor ponsel 08176325462. Pastikan koneksi internet anda cukup baik untuk melanjutkan ke tahap berikutnya."
+                            }
+                        }
                     }
+
                 }
             },
-
             "404-schema":{
                 "type": "object",
                 "properties": {
                     "responseCode":{
                         "type": "string",
                         "minLength": 7,
-                        "example": "4041001"
+                        "example": "4045401"
                         },
                     "responseMessage":{
                         "type": "string",
@@ -264,14 +290,13 @@
                     }
                 }
             }
-        
         },
         "securitySchemes": {
-            "MySecurity":{
+             "MySecurity":{
                 "type": "apiKey",
                 "in": "header",
                 "name": "X-PARTNER-ID",
-                "description": "APIKey as partner-id"
+                "description": "APIKey as Partner-id"
             }
         }
     }

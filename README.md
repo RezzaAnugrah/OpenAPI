@@ -56,3 +56,4 @@ Object OpenAPI :
 5. components : 
     - parameters
     - schemas
+    - securitySchemes

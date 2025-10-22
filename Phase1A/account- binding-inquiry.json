@@ -199,8 +199,8 @@
                 "properties": {
                     "responseCode":{
                         "type": "string",
-                        "minimum": 3,
-                        "example":200
+                        "minimum": 7,
+                        "example":"2000800"
                     },
                     "responseMessage":{
                         "type": "string",
@@ -244,7 +244,7 @@
                     "responseCode":{
                         "type": "string",
                         "minLength": 7,
-                        "example": "4041000"
+                        "example": "4040801"
                         },
                     "responseMessage":{
                         "type": "string",
