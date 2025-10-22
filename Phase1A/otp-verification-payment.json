@@ -17,8 +17,8 @@
         
     },
     "servers": [
-         {
-            "description": "Payment host to host",
+        {
+            "description": "Otp verification payment",
             "url": "http://{env}.organization.com/api/v1.0",
             "variables": {
                 "env":{
@@ -29,9 +29,8 @@
             }
         }
     ],
-    
     "paths": {
-        "/debit/payment-host-to-host":{
+        "/otp-verification":{
             "post":{
                 "security": [{
                     "MySecurity":[]
@@ -52,6 +51,8 @@
                         "$ref": "#/components/parameters/CHANNEL-ID"
                     },{
                         "$ref": "#/components/parameters/Authorization"
+                    },{
+                        "$ref": "#/components/parameters/Authorization-Customer"
                     }
                 ],
                 "requestBody":{
@@ -61,52 +62,56 @@
                             "schema":{
                                 "type": "object",
                                 "properties": {
-                                    "partnerReferenceNo":{
+                                    "originalPartnerReferenceNo":{
                                         "type": "string",
                                         "minLength": 64,
-                                        "example":"INQURY103104"
+                                        "example":"INQURY100901"
                                     },
-                                    "bankCardToken":{
+                                    "originalReferenceNo":{
                                         "type": "string",
-                                        "minLength": 128,
-                                        "example":"UahgvQm7iqAq5VaJCjlkHkRdX4sTa4gFliSZdp3y5XvW"
+                                        "minLength": 64,
+                                        "example":"000932109981"
                                     },
                                     "otp":{
                                         "type": "string",
-                                        "minLength": 8,
-                                        "example":""
+                                        "minLength": 6,
+                                        "example": "659338"
                                     },
-                                    "amount":{
+                                    "action":{
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "example":"54"
+                                    },"type":{
+                                        "type": "string",
+                                        "minLength": 12,
+                                        "example":"Subscribe"
+                                    },"additionalInfo":{
                                         "type": "object",
                                         "properties": {
-                                            "value":{
+                                           "remarks":{
                                                 "type": "string",
-                                                "minLength": 18,
-                                                "example":"10000.00"
+                                                "minLength": 150,
+                                                "example":"Test Payment OTP Verification"
                                             },
-                                            "currency":{
+                                            "otpRefNo":{
                                                 "type": "string",
-                                                "minLength": 3,
-                                                "example":"IDR"
-                                            }
-                                        }
-                                    },
-                                   
-                                    "additionalInfo":{
-                                        "type": "object",
-                                        "properties": {
-                                            "remark":{
+                                                "minLength": 12,
+                                                "example":"0cad033a8f"
+                                            },
+                                            "bankCardToken":{
                                                 "type": "string",
-                                                "minLength": 255,
-                                                "example":"Test Payment"
+                                                "minLength": 64,
+                                                "example":"UahgvQm7iqDELYxDOa+LCcBolIes0q49gwAR5XtwvWTW"
                                             }
                                         }
                                     }
+                                    
+                                   
                                 }
                             }
                         }
                     }
-                }, 
+                },
                 "responses": {
                     "200":{
                         "description": "Success",
@@ -119,21 +124,21 @@
                         }
                     },
                     "404":{
-                        "description": "No found",
+                        "description": "Not found",
                         "content": {
-                            "applicatoin/json":{
+                            "application/json":{
                                 "schema":{
                                     "$ref": "#/components/schemas/404-schema"
                                 }
                             }
                         }
                     }
-                }
 
+                }
             }
         }
     },
-
+    
     "components": {
         "parameters": {
             "X-TIMESTAMP":{
@@ -211,8 +216,21 @@
                     "minLength": 1
                 },
                 "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV"
+            },
+            "Authorization-Customer":{
+                "name": "Authorization-Customer",
+                "in": "header",
+                "required": true,
+                "description": "Authorization-Customer is bearer token",
+                "schema":{
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV"
             }
         },
+
         "schemas": {
             "200-schema":{
                 "type": "object",
@@ -224,55 +242,29 @@
                     },
                     "responseMessage":{
                         "type": "string",
-                        "minLength": 150,
-                        "example":"OTP Sent To Cardholer"
+                        "minLength": 50,
+                        "example":"Successful"
                     },
-                    "referenceNo":{
+                    "originalReferenceNo":{
                         "type": "string",
                         "minLength": 64,
-                        "example":""
+                        "example":"000932109981"
                     },
-                    "partnerReferenceNo":{
+                    "originalPartnerReferenceNo":{
                         "type": "string",
                         "minLength": 64,
                         "example":"INQURY100901"
                     },
-                    "amount":{
-                        "type": "object",
-                        "properties": {
-                           "value":{
-                                "type": "string",
-                                "minLength": 18,
-                                "example":"10000.00"
-                            },
-                            "currency":{
-                                "type": "string",
-                                "minLength": 3,
-                                "example":"IDR"
-                            }
-                        }
-                    },
                     "additionalInfo":{
                         "type": "object",
                         "properties": {
-                           "remark":{
+                            "remarks":{
                                 "type": "string",
                                 "minLength": 255,
-                                "example":"Test payment"
-                            },
-                            "otpRefNo":{
-                                "type": "string",
-                                "minLength": 12,
-                                "example":"9ab0802a66"
-                            },
-                            "message":{
-                                "type": "string",
-                                "minLength": 150,
-                                "example":"Kami telah mengirimkan OTP melalui nomor ponsel 08176325462. Pastikan koneksi internet anda cukup baik untuk melanjutkan ke tahap berikutnya."
+                                "example":"Test Payment OTP Verification"
                             }
                         }
                     }
-
                 }
             },
             "404-schema":{
@@ -291,8 +283,9 @@
                 }
             }
         },
-        "securitySchemes": {
-             "MySecurity":{
+
+        "securitySchemes":{
+            "MySecurity":{
                 "type": "apiKey",
                 "in": "header",
                 "name": "X-PARTNER-ID",
@@ -300,5 +293,4 @@
             }
         }
     }
-
 }
