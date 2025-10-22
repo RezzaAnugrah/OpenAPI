@@ -64,7 +64,8 @@
                                 "properties": {
                                     "partnerReferenceNo":{
                                         "type": "string",
-                                        "minLength": 12,
+                                        "minLength": 1,
+                                        "maxLength": 12,
                                         "example":"BINDAR231101"
                                     },
                                     "additionalInfo":{
@@ -72,12 +73,14 @@
                                         "properties": {
                                             "accountToken":{
                                                 "type": "string",
-                                                "minLength": 256,
+                                                "minLength": 1,
+                                                "maxLength": 256,
                                                 "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
                                             },
                                             "authcode":{
                                                 "type": "string",
-                                                "minLength": 256,
+                                                "minLength": 1,
+                                                "maxLength": 256,
                                                 "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
                                             }
                                         }
@@ -123,8 +126,8 @@
                 "description": "Time to request",
                 "schema":{
                     "type": "string",
-                    "maxLength": 24,
-                    "minLength": 24
+                    "minLength": 1,
+                    "maxLength": 24
                 },
                 "example":"2025-04-28T16:50:34+0700"
             },
@@ -135,8 +138,8 @@
                 "description": "Partner-ID as client",
                 "schema":{
                     "type": "string",
-                    "maxLength": 32,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 32
                 },
                 "example":"06f37ffd2fec213ed333a3b3bc216739"
             
@@ -148,8 +151,8 @@
                 "description": "Signature is original value as sender",
                 "schema":{
                     "type": "string",
-                    "maxLength": 255,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 255
                 },
                 "example":"aG0aynBa+y4UU6jzgrrRfENu6iAxGAC1S44f9jndyT3ggUN6MFBkanLh5DjLQMnPOpqjf3kePzgH7drkdEXhaQ=="
             
@@ -161,8 +164,8 @@
                 "description": "External-ID is unique id per transaction",
                 "schema":{
                     "type": "string",
-                    "maxLength": 12,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 12
                 },
                 "example":"uEqL26081423"
             
@@ -174,8 +177,8 @@
                 "description": "Channel-ID is name of client",
                 "schema":{
                     "type": "string",
-                    "maxLength": 12,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 12
                 },
                 "example":"DIGITAL"
             
@@ -187,8 +190,8 @@
                 "description": "Authorization is bearer token",
                 "schema":{
                     "type": "string",
-                    "maxLength": 255,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 255
                 },
                 "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV"
             }
@@ -199,35 +202,42 @@
                 "properties": {
                     "responseCode":{
                         "type": "string",
-                        "minimum": 7,
+                        "minLength": 1,
+                        "maxLength": 7,
                         "example":"2000800"
                     },
                     "responseMessage":{
                         "type": "string",
-                        "minLength": 6,
+                        "minLength": 1,
+                        "maxLength": 6,
                         "example":"Successful"
                     },
                     "partnerReferenceNo":{
                         "type": "string",
-                        "minLength": 6,
+                        "minLength": 1,
+                        "maxLength": 12,
                         "example":"BINDAR231101"
                     },"referenceNo":{
                         "type": "string",
-                        "minLength": 6,
+                        "minLength": 1,
+                        "maxLength": 12,
                         "example":"28d03816123a"
                     },
                     "accountNo":{
                         "type": "string",
-                        "minLength": 6,
+                        "minLength": 1,
+                        "maxLength": 15,
                         "example":"7070808090100"
                     },"accountName":{
                         "type": "string",
-                        "minLength": 6,
+                        "minLength": 1,
+                        "maxLength": 100,
                         "example":"Rezza Anugrah Mutiarawan"
                     },
                     "accountTransactionLimit":{
                         "type": "string",
-                        "minLength": 6,
+                        "minLength": 1,
+                        "maxLength": 18,
                         "example":"10000000"
                     },"accountCurrency":{
                         "type": "string",
@@ -243,12 +253,14 @@
                 "properties": {
                     "responseCode":{
                         "type": "string",
-                        "minLength": 7,
+                        "minLength": 1,
+                        "maxLength": 7,
                         "example": "4040801"
                         },
                     "responseMessage":{
                         "type": "string",
-                        "minLength": 50,
+                        "minLength": 1,
+                        "maxLength": 50,
                         "example":"Not found"
                     }
                 }

@@ -29,9 +29,9 @@
             }
         }
     ],
-    
+
     "paths": {
-        "/debit/payment-host-to-host":{
+        "/debit/status":{
             "post":{
                 "security": [{
                     "MySecurity":[]
@@ -61,49 +61,38 @@
                             "schema":{
                                 "type": "object",
                                 "properties": {
-                                    "partnerReferenceNo":{
+                                    "originalPartnerReferenceNo":{
                                         "type": "string",
                                         "minLength": 1,
-                                        "maxLength": 64,
-                                        "example":"INQURY103104"
+                                        "maxLength": 12,
+                                        "example":"PAYAR2311202"
                                     },
-                                    "bankCardToken":{
+                                    "originalReferenceNo":{
                                         "type": "string",
                                         "minLength": 1,
-                                        "maxLength": 128,
-                                        "example":"UahgvQm7iqAq5VaJCjlkHkRdX4sTa4gFliSZdp3y5XvW"
+                                        "maxLength": 12,
+                                        "example":"000976071303"
                                     },
-                                    "otp":{
+                                    "serviceCode":{
                                         "type": "string",
                                         "minLength": 1,
-                                        "maxLength": 8,
-                                        "example":""
-                                    },
-                                    "amount":{
-                                        "type": "object",
-                                        "properties": {
-                                            "value":{
-                                                "type": "string",
-                                                "minLength": 1,
-                                                "maxLength": 18,
-                                                "example":"10000.00"
-                                            },
-                                            "currency":{
-                                                "type": "string",
-                                                "minLength": 1,
-                                                "maxLength": 3,
-                                                "example":"IDR"
-                                            }
-                                        }
+                                        "maxLength": 2,
+                                        "example":"54"
                                     },
                                     "additionalInfo":{
                                         "type": "object",
                                         "properties": {
-                                            "remark":{
+                                           "bankCardToken":{
                                                 "type": "string",
                                                 "minLength": 1,
-                                                "maxLength": 255,
-                                                "example":"Test Payment"
+                                                "maxLength": 50,
+                                                "example":"UahgvQm7iqA7s/8m0wjIvYHlFj2HcGiGgwAR5XtwvWTW"
+                                            },
+                                            "partnerReferenceNo":{
+                                                "type": "string",
+                                                "minLength": 1,
+                                                "maxLength": 12,
+                                                "example":"STATUS112701"
                                             }
                                         }
                                     }
@@ -111,9 +100,9 @@
                             }
                         }
                     }
-                }, 
+                },
                 "responses": {
-                    "200":{
+                     "200":{
                         "description": "Success",
                         "content": {
                             "application/json":{
@@ -134,11 +123,10 @@
                         }
                     }
                 }
-
             }
         }
     },
-
+    
     "components": {
         "parameters": {
             "X-TIMESTAMP":{
@@ -223,7 +211,7 @@
                 "type": "object",
                 "properties": {
                     "responseCode":{
-                        "type": "string",
+                        "type": "string", 
                         "minLength": 1,
                         "maxLength": 7,
                         "example": "2005400"
@@ -232,21 +220,15 @@
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 150,
-                        "example":"OTP Sent To Cardholer"
+                        "example":"Successful"
                     },
-                    "referenceNo":{
+                    "originalReferenceNo":{
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 64,
-                        "example":""
+                        "example":"000902191565"
                     },
-                    "partnerReferenceNo":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 64,
-                        "example":"INQURY100901"
-                    },
-                    "amount":{
+                    "transAmount":{
                         "type": "object",
                         "properties": {
                            "value":{
@@ -263,32 +245,39 @@
                             }
                         }
                     },
-                    "additionalInfo":{
-                        "type": "object",
-                        "properties": {
-                           "remark":{
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 255,
-                                "example":"Test payment"
-                            },
-                            "otpRefNo":{
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 12,
-                                "example":"9ab0802a66"
-                            },
-                            "message":{
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 150,
-                                "example":"Kami telah mengirimkan OTP melalui nomor ponsel 08176325462. Pastikan koneksi internet anda cukup baik untuk melanjutkan ke tahap berikutnya."
-                            }
-                        }
+                    "originalPartnerReferenceNo":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "example":"INQURY090011"
+                    },
+                    "latestTransactionStatus":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 4,
+                        "example":"00"
+                    },
+                    "transactionStatusDesc":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 25,
+                        "example":"SUCCESS"
+                    },
+                    "paidTime":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 25,
+                        "example":"2023-09-08T16:54:00+07:00"
+                    },
+                    "partnerReferenceNo":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "example":"STATUS090011"
                     }
-
                 }
             },
+
             "404-schema":{
                 "type": "object",
                 "properties": {
@@ -296,7 +285,7 @@
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 7,
-                        "example": "4045401"
+                        "example": "4045500"
                         },
                     "responseMessage":{
                         "type": "string",
@@ -307,6 +296,7 @@
                 }
             }
         },
+
         "securitySchemes": {
              "MySecurity":{
                 "type": "apiKey",

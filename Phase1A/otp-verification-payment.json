@@ -64,43 +64,51 @@
                                 "properties": {
                                     "originalPartnerReferenceNo":{
                                         "type": "string",
-                                        "minLength": 64,
+                                        "minLength": 1,
+                                        "maxLength": 64,
                                         "example":"INQURY100901"
                                     },
                                     "originalReferenceNo":{
                                         "type": "string",
-                                        "minLength": 64,
+                                        "minLength": 1,
+                                        "maxLength": 64,
                                         "example":"000932109981"
                                     },
                                     "otp":{
                                         "type": "string",
-                                        "minLength": 6,
+                                        "minLength": 1,
+                                        "maxLength": 6,
                                         "example": "659338"
                                     },
                                     "action":{
                                         "type": "string",
-                                        "minLength": 2,
+                                        "minLength": 1,
+                                        "maxLength": 2,
                                         "example":"54"
                                     },"type":{
                                         "type": "string",
-                                        "minLength": 12,
+                                        "minLength": 1,
+                                        "maxLength": 12,
                                         "example":"Subscribe"
                                     },"additionalInfo":{
                                         "type": "object",
                                         "properties": {
                                            "remarks":{
                                                 "type": "string",
-                                                "minLength": 150,
+                                                "minLength": 1,
+                                                "maxLength": 150,
                                                 "example":"Test Payment OTP Verification"
                                             },
                                             "otpRefNo":{
                                                 "type": "string",
-                                                "minLength": 12,
+                                                "minLength": 1,
+                                                "maxLength": 12,
                                                 "example":"0cad033a8f"
                                             },
                                             "bankCardToken":{
                                                 "type": "string",
-                                                "minLength": 64,
+                                                "minLength": 1,
+                                                "maxLength": 64,
                                                 "example":"UahgvQm7iqDELYxDOa+LCcBolIes0q49gwAR5XtwvWTW"
                                             }
                                         }
@@ -148,8 +156,8 @@
                 "description": "Time to request",
                 "schema":{
                     "type": "string",
-                    "maxLength": 24,
-                    "minLength": 24
+                    "minLength": 1,
+                    "maxLength": 24
                 },
                 "example":"2025-04-28T16:50:34+0700"
             },
@@ -160,8 +168,8 @@
                 "description": "Partner-ID as client",
                 "schema":{
                     "type": "string",
-                    "maxLength": 32,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 32
                 },
                 "example":"06f37ffd2fec213ed333a3b3bc216739"
             
@@ -173,8 +181,8 @@
                 "description": "Signature is original value as sender",
                 "schema":{
                     "type": "string",
-                    "maxLength": 255,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 255
                 },
                 "example":"aG0aynBa+y4UU6jzgrrRfENu6iAxGAC1S44f9jndyT3ggUN6MFBkanLh5DjLQMnPOpqjf3kePzgH7drkdEXhaQ=="
             
@@ -186,8 +194,8 @@
                 "description": "External-ID is unique id per transaction",
                 "schema":{
                     "type": "string",
-                    "maxLength": 12,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 12
                 },
                 "example":"uEqL26081423"
             
@@ -199,8 +207,8 @@
                 "description": "Channel-ID is name of client",
                 "schema":{
                     "type": "string",
-                    "maxLength": 12,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 12
                 },
                 "example":"DIGITAL"
             
@@ -212,8 +220,8 @@
                 "description": "Authorization is bearer token",
                 "schema":{
                     "type": "string",
-                    "maxLength": 255,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 255
                 },
                 "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV"
             },
@@ -224,8 +232,8 @@
                 "description": "Authorization-Customer is bearer token",
                 "schema":{
                     "type": "string",
-                    "maxLength": 255,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 255
                 },
                 "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV"
             }
@@ -237,22 +245,26 @@
                 "properties": {
                     "responseCode":{
                         "type": "string",
-                        "minLength": 7,
+                        "minLength": 1,
+                        "maxLength": 7,
                         "example": "2005400"
                     },
                     "responseMessage":{
                         "type": "string",
-                        "minLength": 50,
+                        "minLength": 1,
+                        "maxLength": 50,
                         "example":"Successful"
                     },
                     "originalReferenceNo":{
                         "type": "string",
-                        "minLength": 64,
+                        "minLength": 1,
+                        "maxLength": 64,
                         "example":"000932109981"
                     },
                     "originalPartnerReferenceNo":{
                         "type": "string",
-                        "minLength": 64,
+                        "minLength": 1,
+                        "maxLength": 64,
                         "example":"INQURY100901"
                     },
                     "additionalInfo":{
@@ -260,7 +272,8 @@
                         "properties": {
                             "remarks":{
                                 "type": "string",
-                                "minLength": 255,
+                                "minLength": 1,
+                                "maxLength": 255,
                                 "example":"Test Payment OTP Verification"
                             }
                         }
@@ -272,12 +285,14 @@
                 "properties": {
                     "responseCode":{
                         "type": "string",
-                        "minLength": 7,
+                        "minLength": 1,
+                        "maxLength": 7,
                         "example": "4045401"
                         },
                     "responseMessage":{
                         "type": "string",
-                        "minLength": 50,
+                        "minLength": 1,
+                        "maxLength": 50,
                         "example":"Not found"
                     }
                 }

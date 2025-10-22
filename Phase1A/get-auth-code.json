@@ -99,8 +99,8 @@
                 "description": "Time to request",
                 "schema":{
                     "type": "string",
+                    "minLength": 1,
                     "maxLength": 24,
-                    "minLength": 24
                 },
                 "example":"2025-04-28T16:50:34+0700"
             },
@@ -111,8 +111,8 @@
                 "description": "Partner-ID as client",
                 "schema":{
                     "type": "string",
-                    "maxLength": 32,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 32
                 },
                 "example":"06f37ffd2fec213ed333a3b3bc216739"
             
@@ -124,8 +124,8 @@
                 "description": "Signature is original value as sender",
                 "schema":{
                     "type": "string",
-                    "maxLength": 255,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 255
                 },
                 "example":"aG0aynBa+y4UU6jzgrrRfENu6iAxGAC1S44f9jndyT3ggUN6MFBkanLh5DjLQMnPOpqjf3kePzgH7drkdEXhaQ=="
             
@@ -137,8 +137,8 @@
                 "description": "External-ID is unique id per transaction",
                 "schema":{
                     "type": "string",
-                    "maxLength": 12,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 12
                 },
                 "example":"uEqL26081423"
             
@@ -150,8 +150,8 @@
                 "description": "Channel-ID is name of client",
                 "schema":{
                     "type": "string",
-                    "maxLength": 12,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 12
                 },
                 "example":"DIGITAL"
             
@@ -163,8 +163,8 @@
                 "description": "Authorization is bearer token",
                 "schema":{
                     "type": "string",
-                    "maxLength": 255,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 255
                 },
                 "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV-rzwiRgxE3UDYxbrhIpvPNZ0eyplxRYhBqCS7HTsBdVvW0LsWX69dZcR100KEb6e0D8ailQvneTugc8ebLydHk"
             
@@ -176,8 +176,8 @@
                 "description": "Random string from request",
                 "schema":{
                     "type": "string",
-                    "maxLength": 12,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 12
                 },
                 "example":"WodkkwijSDs"
             
@@ -189,8 +189,8 @@
                 "description": "scopes",
                 "schema":{
                     "type": "string",
-                    "maxLength": 50,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 50
                 },
                 "example":"QUERY_BALANCE,PUBLIC_ID"
             
@@ -202,8 +202,8 @@
                 "description": "redirectUrl",
                 "schema":{
                     "type": "string",
-                    "maxLength": 50,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 50
                 },
                 "example":"https://www.google.com/success-page"
             }
@@ -215,8 +215,8 @@
                 "description": "seamlessData",
                 "schema":{
                     "type": "string",
-                    "maxLength": 150,
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 150
                 },
                 "example":"%7B%22mobileNumber%22%3D%22082111641773%22%7D"
             }
@@ -228,22 +228,26 @@
                 "properties": {
                     "responseCode":{
                         "type": "string",
-                        "minLength": 7,
+                        "minLength": 1,
+                        "maxLength": 7,
                         "example": "2001000"
                     },
                     "responseMessage":{
                         "type": "string",
-                        "minLength": 150,
+                        "minLength": 1,
+                        "maxLength": 150,
                         "example":"Successful"
                     }, 
                     "authcode":{
                         "type": "string",
-                        "minLength": 256,
+                        "minLength": 1,
+                        "maxLength": 256,
                         "example":"28d03816-84ef-11ed-8fc2-0a17510e0000"
                     },
                     "state":{
                         "type": "string",
-                        "minLength": 32,
+                        "minLength": 1,
+                        "maxLength": 32,
                         "example":"WodkkwijSDs"
                     }
                 }
@@ -254,12 +258,14 @@
                 "properties": {
                     "responseCode":{
                         "type": "string",
-                        "minLength": 7,
+                        "minLength": 1,
+                        "maxLength": 7,
                         "example": "4041001"
                         },
                     "responseMessage":{
                         "type": "string",
-                        "minLength": 50,
+                        "minLength": 1,
+                        "maxLength": 50,
                         "example":"Not found"
                     }
                 }
