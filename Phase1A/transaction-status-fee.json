@@ -95,6 +95,12 @@
                                                 "minLength": 1,
                                                 "maxLength": 12,
                                                 "example":"STATUS112701"
+                                            },
+                                            "feeType":{
+                                                "type": "string",
+                                                "minLength": 1,
+                                                "maxLength": 2,
+                                                "example":"2"
                                             }
                                         }
                                     }

@@ -216,6 +216,18 @@
                     "maxLength": 255
                 },
                 "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV"
+            },
+            "Authorization-Customer":{
+                "name": "Authorization-Customer",
+                "in": "header",
+                "required": true,
+                "description": "Authorization-Customer is bearer token",
+                "schema":{
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                },
+                "example":"AAIgZmRlNDM2OWJjOTg3OGZlYTkyMzRiYzEyM2ZmNmJjYWGmomHsnOaJmD5qww7P5bvKrYJWDaSjGVJ6YXuJugEHV"
             }
         },
         "schemas": {

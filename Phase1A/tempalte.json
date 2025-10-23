@@ -20,7 +20,50 @@
     "paths": {},
     "components": {
         "parameters": {},
-        "schemas": {}
+        "schemas": {
+            "200-schema":{
+                "type": "object",
+                "properties": {
+                    "responseCode":{
+                        "type": "string", 
+                        "minLength": 1,
+                        "maxLength": 7,
+                        "example": "2005400"
+                    },
+                    "responseMessage":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 150,
+                        "example":"Successful"
+                    }
+                }
+            },
+            "404-schema":{
+                "type": "object",
+                "properties": {
+                    "responseCode":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 7,
+                        "example": "4045400"
+                        },
+                    "responseMessage":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 50,
+                        "example":"Not found"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+             "MySecurity":{
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-PARTNER-ID",
+                "description": "APIKey as Partner-id"
+            }
+        }
     }
 
 }

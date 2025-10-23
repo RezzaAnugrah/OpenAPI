@@ -29,16 +29,15 @@
             }
         }
     ],
-
     "paths": {
-        "/debit/status":{
+        "/debit/refund":{
             "post":{
-                "security": [{
+                  "security": [{
                     "MySecurity":[]
                 }],
                 "tags": ["Phase1A"],
-                "description": "Payment status - B2B2C",
-                "summary": "Payment status - B2B2C",
+                "description": "Payment refund - B2B2C",
+                "summary": "Payment refund - B2B2C",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/X-TIMESTAMP"
@@ -67,19 +66,42 @@
                                         "type": "string",
                                         "minLength": 1,
                                         "maxLength": 12,
-                                        "example":"PAYAR2311202"
+                                        "example":"INQURY090011"
                                     },
                                     "originalReferenceNo":{
                                         "type": "string",
                                         "minLength": 1,
                                         "maxLength": 12,
-                                        "example":"000976071303"
+                                        "example":"000902191565"
                                     },
-                                    "serviceCode":{
+                                    "partnerRefundNo":{
                                         "type": "string",
                                         "minLength": 1,
-                                        "maxLength": 2,
-                                        "example":"54"
+                                        "maxLength": 12,
+                                        "example":"REFUND090012"
+                                    },
+                                     "refundAmount":{
+                                        "type": "object",
+                                        "properties": {
+                                            "value":{
+                                                "type": "string",
+                                                "minLength": 1,
+                                                "maxLength": 18,
+                                                "example":"11000.00"
+                                            },
+                                            "currency":{
+                                                "type": "string",
+                                                "minLength": 1,
+                                                "maxLength": 3,
+                                                "example":"IDR"
+                                            }
+                                        }
+                                    },
+                                    "reason":{
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 50,
+                                        "example":"Customer Complain"
                                     },
                                     "additionalInfo":{
                                         "type": "object",
@@ -90,21 +112,22 @@
                                                 "maxLength": 50,
                                                 "example":"UahgvQm7iqA7s/8m0wjIvYHlFj2HcGiGgwAR5XtwvWTW"
                                             },
-                                            "partnerReferenceNo":{
+                                            "feeType":{
                                                 "type": "string",
                                                 "minLength": 1,
-                                                "maxLength": 12,
-                                                "example":"STATUS112701"
+                                                "maxLength": 2,
+                                                "example":"2"
                                             }
                                         }
                                     }
                                 }
+                                
                             }
                         }
                     }
                 },
                 "responses": {
-                     "200":{
+                    "200":{
                         "description": "Success",
                         "content": {
                             "application/json":{
@@ -115,9 +138,9 @@
                         }
                     },
                     "404":{
-                        "description": "No found",
+                        "description": "Not found",
                         "content": {
-                            "applicatoin/json":{
+                            "application/json":{
                                 "schema":{
                                     "$ref": "#/components/schemas/404-schema"
                                 }
@@ -128,7 +151,6 @@
             }
         }
     },
-    
     "components": {
         "parameters": {
             "X-TIMESTAMP":{
@@ -225,31 +247,49 @@
                 "type": "object",
                 "properties": {
                     "responseCode":{
-                        "type": "string", 
+                        "type": "string",
                         "minLength": 1,
                         "maxLength": 7,
-                        "example": "2005400"
+                        "example": "2005800"
                     },
                     "responseMessage":{
                         "type": "string",
                         "minLength": 1,
-                        "maxLength": 150,
+                        "maxLength": 50,
                         "example":"Successful"
+                    },
+                    "originalPartnerReferenceNo":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 50,
+                        "example":"INQURY090011"
                     },
                     "originalReferenceNo":{
                         "type": "string",
                         "minLength": 1,
-                        "maxLength": 64,
+                        "maxLength": 50,
                         "example":"000902191565"
                     },
-                    "transAmount":{
+                    "refundNo":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 50,
+                        "example":"000902192279"
+                    },
+                    "partnerRefundNo":{
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 50,
+                        "example":"REFUND090011"
+                    },
+                    "refundAmount":{
                         "type": "object",
                         "properties": {
-                           "value":{
+                            "value":{
                                 "type": "string",
                                 "minLength": 1,
                                 "maxLength": 18,
-                                "example":"10000.00"
+                                "example":"11000.00"
                             },
                             "currency":{
                                 "type": "string",
@@ -259,39 +299,25 @@
                             }
                         }
                     },
-                    "originalPartnerReferenceNo":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 64,
-                        "example":"INQURY090011"
-                    },
-                    "latestTransactionStatus":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 4,
-                        "example":"00"
-                    },
-                    "transactionStatusDesc":{
+                    "refundTime":{
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 25,
-                        "example":"SUCCESS"
+                        "example":"2023-09-08T16:55:09+07:00"
                     },
-                    "paidTime":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 25,
-                        "example":"2023-09-08T16:54:00+07:00"
-                    },
-                    "partnerReferenceNo":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 64,
-                        "example":"STATUS090011"
+                    "additionalInfo":{
+                        "type": "object",
+                        "properties": {
+                            "remarks":{
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 50,
+                                "example":"Customer Complain"
+                            }
+                        }
                     }
                 }
             },
-
             "404-schema":{
                 "type": "object",
                 "properties": {
@@ -299,7 +325,7 @@
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 7,
-                        "example": "4045500"
+                        "example": "4045800"
                         },
                     "responseMessage":{
                         "type": "string",
@@ -308,15 +334,6 @@
                         "example":"Not found"
                     }
                 }
-            }
-        },
-
-        "securitySchemes": {
-             "MySecurity":{
-                "type": "apiKey",
-                "in": "header",
-                "name": "X-PARTNER-ID",
-                "description": "APIKey as Partner-id"
             }
         }
     }

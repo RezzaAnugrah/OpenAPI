@@ -29,16 +29,16 @@
             }
         }
     ],
-
     "paths": {
-        "/debit/status":{
+        "/registration-account-binding":{
             "post":{
-                "security": [{
-                    "MySecurity":[]
-                }],
+
+                "security": [
+                    {"MySecurity":[]}
+                ],
                 "tags": ["Phase1A"],
-                "description": "Payment status - B2B2C",
-                "summary": "Payment status - B2B2C",
+                "description": "Registration account unbinding - B2B2C",
+                "summary": "Registration account unbinding - B2B2C",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/X-TIMESTAMP"
@@ -63,38 +63,32 @@
                             "schema":{
                                 "type": "object",
                                 "properties": {
-                                    "originalPartnerReferenceNo":{
+                                    "partnerReferenceNo":{
                                         "type": "string",
-                                        "minLength": 1,
+                                         "minLength": 1,
                                         "maxLength": 12,
-                                        "example":"PAYAR2311202"
+                                        "example":"BINDAR231101"
                                     },
-                                    "originalReferenceNo":{
+                                    "merchantId":{
                                         "type": "string",
-                                        "minLength": 1,
-                                        "maxLength": 12,
-                                        "example":"000976071303"
-                                    },
-                                    "serviceCode":{
-                                        "type": "string",
-                                        "minLength": 1,
-                                        "maxLength": 2,
-                                        "example":"54"
+                                         "minLength": 1,
+                                        "maxLength": 64,
+                                        "example":"DIGITAL"
                                     },
                                     "additionalInfo":{
                                         "type": "object",
                                         "properties": {
-                                           "bankCardToken":{
+                                            "accountToken":{
                                                 "type": "string",
                                                 "minLength": 1,
                                                 "maxLength": 50,
-                                                "example":"UahgvQm7iqA7s/8m0wjIvYHlFj2HcGiGgwAR5XtwvWTW"
+                                                "example":"UahgvQm7iqBt454COFXzPXMUdHG6QxmeliSZdp3y5XvW"
                                             },
-                                            "partnerReferenceNo":{
+                                            "isOTP":{
                                                 "type": "string",
                                                 "minLength": 1,
-                                                "maxLength": 12,
-                                                "example":"STATUS112701"
+                                                "maxLength": 1,
+                                                "example":"N"
                                             }
                                         }
                                     }
@@ -104,7 +98,7 @@
                     }
                 },
                 "responses": {
-                     "200":{
+                    "200":{
                         "description": "Success",
                         "content": {
                             "application/json":{
@@ -115,9 +109,9 @@
                         }
                     },
                     "404":{
-                        "description": "No found",
+                        "description": "Not found",
                         "content": {
-                            "applicatoin/json":{
+                            "application/json":{
                                 "schema":{
                                     "$ref": "#/components/schemas/404-schema"
                                 }
@@ -126,9 +120,9 @@
                     }
                 }
             }
+        
         }
     },
-    
     "components": {
         "parameters": {
             "X-TIMESTAMP":{
@@ -228,70 +222,16 @@
                         "type": "string", 
                         "minLength": 1,
                         "maxLength": 7,
-                        "example": "2005400"
+                        "example": "2000900"
                     },
                     "responseMessage":{
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 150,
                         "example":"Successful"
-                    },
-                    "originalReferenceNo":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 64,
-                        "example":"000902191565"
-                    },
-                    "transAmount":{
-                        "type": "object",
-                        "properties": {
-                           "value":{
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 18,
-                                "example":"10000.00"
-                            },
-                            "currency":{
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 3,
-                                "example":"IDR"
-                            }
-                        }
-                    },
-                    "originalPartnerReferenceNo":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 64,
-                        "example":"INQURY090011"
-                    },
-                    "latestTransactionStatus":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 4,
-                        "example":"00"
-                    },
-                    "transactionStatusDesc":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 25,
-                        "example":"SUCCESS"
-                    },
-                    "paidTime":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 25,
-                        "example":"2023-09-08T16:54:00+07:00"
-                    },
-                    "partnerReferenceNo":{
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 64,
-                        "example":"STATUS090011"
                     }
                 }
             },
-
             "404-schema":{
                 "type": "object",
                 "properties": {
@@ -299,7 +239,7 @@
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 7,
-                        "example": "4045500"
+                        "example": "4040900"
                         },
                     "responseMessage":{
                         "type": "string",
@@ -310,7 +250,6 @@
                 }
             }
         },
-
         "securitySchemes": {
              "MySecurity":{
                 "type": "apiKey",
